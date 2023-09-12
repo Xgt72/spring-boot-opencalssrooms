@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: spring-security
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_security?serverTimezone=GMT
+    username: root
+    password: Xgt72@web-dev!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        "[format_sql]": true
+        dialect: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQL8InnoDBDialect
+
+server:
+  port: 8000
+
+logging:
+  level:
+    root: error
+    com:
+      springboot: info
+    org:
+      springframework:
+        boot:
+          web:
+            embedded:
+              tomcat: info
+
+com:
+  springboot:
+    security:
+      jwt_secret: T8QED3UrCevmV6zj3VJaTmrAYcqj4Ct07F9AVKqvGaxvHGpbMJXWvHUwihMsDE4
