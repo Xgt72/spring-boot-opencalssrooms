@@ -21,20 +21,38 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
     http
-        .csrf(csrf -> csrf
-            .disable()
-            .authorizeHttpRequests()
-            .requestMatchers()
-            .permitAll()
-            .anyRequest()
-            .authenticated()
-            .and()
-            .sessionManagement(management -> management
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class));
+        .csrf((csrf) -> csrf.disable())
+        .authorizeHttpRequests(
+            (authorizeHttpRequests) -> authorizeHttpRequests.requestMatchers("/api/v1/auth/**").permitAll()
+                .anyRequest().authenticated())
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    // .permitAll()
+    // .anyRequest()
+    // .authenticated()
+    // .and()
+    // .sessionManagement()
+    // .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    // .and()
+    // .authenticationProvider(authenticationProvider)
+    // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+    // http
+    // .csrf()
+    // .disable()
+    // .authorizeHttpRequests()
+    // .requestMatchers("/api/v1/auth/**")
+    // .permitAll()
+    // .anyRequest()
+    // .authenticated()
+    // .and()
+    // .sessionManagement()
+    // .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    // .and()
+    // .authenticationProvider(authenticationProvider)
+    // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
